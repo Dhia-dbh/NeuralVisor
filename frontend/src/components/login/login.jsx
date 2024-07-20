@@ -4,8 +4,21 @@ import "./login.css"
 import { redirectDocument } from 'react-router-dom';
 export default function Login() {
     const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const handleChange = (e) => {
+        switch (e.target.name) {
+            case "username":
+                setUsername(e.target.value);
+                break;
+            case "password":
+                setPassword(e.target.value);
+                break;
+        }
+    }
     const [isPupilSelected, setIsPupilSelected] = useState(true);
     const handleSelectionChange = (newSelection) => {
+        setPassword("");
         if (newSelection === "Pupil") {
             setIsPupilSelected(true);
         }
@@ -26,13 +39,15 @@ export default function Login() {
                         <span className={isPupilSelected ? "selected" : ""} onClick={() => handleSelectionChange("Pupil")}>Pupil</span>
                         <span className={!isPupilSelected ? "selected" : ""} onClick={() => handleSelectionChange("Teacher")}>Teacher</span>
                     </div>
-                    <div className='form'>
+                    <div className='form-login'>
                         <form action="">
-                            <input placeholder='Username' type="text" name="username" id="username" />
-                            <input placeholder='Password' type="password" name="password" id="password" />
+                            <input placeholder='Username' type="text" name="username" id="username" onChange={handleChange} value={username} />
+                            <input placeholder='Password' type="password" name="password" id="password" onChange={handleChange} value={password} />
                             <div className='login_buttons'>
                                 <input type="button" value="Login" className='btn btn-primary' />
-                                <div className='no_account'>You don't have an account ? <a href="/register">Click here</a></div>
+                                <div className='no_account'>You don't have an account ? <span className='link-like' onClick={() => {
+                                    navigate("/register")
+                                }}>Click here</span></div>
                                 <div className='goToHome'> <span className='link-like' onClick={() => {
                                     navigate("/professor")
                                 }}>SKIP LOGIN</span></div>

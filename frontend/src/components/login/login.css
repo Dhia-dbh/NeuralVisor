@@ -19,13 +19,13 @@
     color: white;
     font-family: 'JK Adobe';
     font-weight: 400;
-    font-size: 96px;
+    font-size: 64px;
     line-height: 96px;
-    margin: 25px;
+    margin: 0 25px;
 }
 
 .content,
-.form>form {
+.form-login>form {
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -39,7 +39,7 @@
 
 .type_selection span {
     color: white;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 400;
     font-family: "Acme";
     padding: 15px 30px;
@@ -55,7 +55,7 @@
     opacity: 0px;
 }
 
-.form {
+.form-login {
     background-color: #D9D9D90F;
     max-width: 620px;
     max-height: 420px;
@@ -68,12 +68,13 @@
     height: auto;
 }
 
-.form>form>input {
+.form-login>form>input {
     margin: 24px;
     padding: 5px;
     background: transparent;
     border: none;
     border-bottom: 1px solid white;
+    color: white;
 }
 
 .login_buttons {
@@ -112,7 +113,7 @@
     height: 70%;
     left: 0;
     top: 50%;
-    transform: translate(0, -50%);
+    transform: translate(0, -50%), scale(0.8);
 }
 
 #bottom-right-triangles {
