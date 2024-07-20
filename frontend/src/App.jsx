@@ -6,6 +6,7 @@ import Register from '@components/register/register'
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate 
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
@@ -13,7 +14,7 @@ import './App.css'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Navigate  to="/login" />,
   },
   {
     path: "/login",
