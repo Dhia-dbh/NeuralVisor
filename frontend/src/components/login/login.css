@@ -133,3 +133,30 @@
     border: none;
     border-bottom: 1px solid white
 }
+
+.goToHome {
+    text-align: center;
+}
+
+.goToHome a {
+    color: white
+}
+
+.link-like {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+}
+
+.link-like:hover {
+    color: rgb(96, 96, 96);
+}
+
+.link-like:active {
+    color: red;
+}
+
+.link-like:focus {
+    outline: none;
+}

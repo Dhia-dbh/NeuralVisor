@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import "./login.css"
+import { redirectDocument } from 'react-router-dom';
 export default function Login() {
+    const navigate = useNavigate();
     const [isPupilSelected, setIsPupilSelected] = useState(true);
     const handleSelectionChange = (newSelection) => {
         if (newSelection === "Pupil") {
@@ -12,6 +15,7 @@ export default function Login() {
     }
     return (
         <div className='bg-default'>
+
             <img src="shredded circle.svg" alt="upper-left-circle" id='upper-left-circle' />
             <img src="left circle.svg" alt="left-circle" id='left-circle' />
             <img src="bottom right triangles.svg" alt="bottom-right-triangles" id='bottom-right-triangles' />
@@ -29,6 +33,9 @@ export default function Login() {
                             <div className='login_buttons'>
                                 <input type="button" value="Login" className='btn btn-primary' />
                                 <div className='no_account'>You don't have an account ? <a href="/register">Click here</a></div>
+                                <div className='goToHome'> <span className='link-like' onClick={() => {
+                                    navigate("/professor")
+                                }}>SKIP LOGIN</span></div>
 
                             </div>
                         </form>

@@ -25,8 +25,10 @@ export default function Login() {
                     </div>
                     <div className='form'>
                         <form action="">
+                            <input placeholder='Email' type="email" name="email" id="email" />
                             <input placeholder='Username' type="text" name="username" id="username" />
                             <input placeholder='Password' type="password" name="password" id="password" />
+                            <input placeholder='Confirm Password' type="password" name="passwordConfirmation" id="passwordConfirmation" />
                             <div className='login_buttons'>
                                 <input type="button" value="Sign up" className='btn btn-primary' />
                                 <SignInWithGoogle />
