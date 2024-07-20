@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import "./login.css"
+import SignInWithGoogle from '@components/register/SignInWithGoogle';
+import "./register.css"
 export default function Login() {
     const [isPupilSelected, setIsPupilSelected] = useState(true);
     const handleSelectionChange = (newSelection) => {
@@ -16,7 +17,7 @@ export default function Login() {
             <img src="left circle.svg" alt="left-circle" id='left-circle' />
             <img src="bottom right triangles.svg" alt="bottom-right-triangles" id='bottom-right-triangles' />
             <div className='main'>
-                <div className='title'>Login</div>
+                <div className='title'>Register</div>
                 <div className='content'>
                     <div className='type_selection'>
                         <span className={isPupilSelected ? "selected" : ""} onClick={() => handleSelectionChange("Pupil")}>Pupil</span>
@@ -27,8 +28,9 @@ export default function Login() {
                             <input placeholder='Username' type="text" name="username" id="username" />
                             <input placeholder='Password' type="password" name="password" id="password" />
                             <div className='login_buttons'>
-                                <input type="button" value="Login" className='btn btn-primary' />
-                                <div className='no_account'>You don't have an account ? <a href="/register">Click here</a></div>
+                                <input type="button" value="Sign up" className='btn btn-primary' />
+                                <SignInWithGoogle />
+                                <div className='no_account'>Already have an account ? <a href="/login">Click here</a></div>
 
                             </div>
                         </form>
