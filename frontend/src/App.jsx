@@ -10,8 +10,10 @@ import {
   RouterProvider,
   Navigate
 } from "react-router-dom";
+import useAuth from "@hooks/useAuth";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import RequireAuth from './components/requireAuth'
 const navbar_items = [
   {
     path: "/dashboard",
@@ -40,10 +42,7 @@ const navbar_items = [
   },
 ]
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Navigate to="/home" />,
-  },
+
   {
     path: "/login",
     element: <Login />
@@ -53,20 +52,30 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "/professor",
-    element: <Professor navbar_items={navbar_items} />
-  },
-  {
-    path: "/home",
-    element: <Home />
-  },
+    path: "/",
+    element: <RequireAuth />,
+    children: [
+      {
+        path: "/professor",
+        element: <Professor navbar_items={navbar_items} />
+      },
+      {
+        path: "/home",
+        element: <Home />
+      }, {
+        path: "/",
+        element: <Navigate to="/home" />,
+      },
+
+    ]
+  }
 
 ]);
 
 
 
 function App() {
-
+  const { auth, setAuth } = useAuth();
 
   return (
     <>
