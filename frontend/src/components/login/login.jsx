@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import "./login.css"
-import { redirectDocument } from 'react-router-dom';
+import useAuth from "@hooks/useAuth";
 export default function Login() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const { setAuth } = useAuth();
     const handleChange = (e) => {
         switch (e.target.name) {
             case "username":
@@ -25,6 +26,13 @@ export default function Login() {
         else {
             setIsPupilSelected(false);
         }
+    }
+    const handleSkipLogin = () => {
+        setAuth({
+            _id: "123",
+            username: "Dhia",
+        })
+        navigate("/professor")
     }
     return (
         <div className='bg-default'>
@@ -48,9 +56,9 @@ export default function Login() {
                                 <div className='no_account'>You don't have an account ? <span className='link-like' onClick={() => {
                                     navigate("/register")
                                 }}>Click here</span></div>
-                                <div className='goToHome'> <span className='link-like' onClick={() => {
-                                    navigate("/professor")
-                                }}>SKIP LOGIN</span></div>
+                                <div className='goToHome'> <span className='link-like' onClick={
+                                    handleSkipLogin
+                                }>SKIP LOGIN</span></div>
 
                             </div>
                         </form>

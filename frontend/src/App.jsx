@@ -5,6 +5,7 @@ import Login from '@components/login/login'
 import Register from '@components/register/register'
 import Home from '@components/home/home'
 import Professor from '@components/professor/professor'
+import NotFound from '@components/not-found/not-found'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -44,6 +45,14 @@ const navbar_items = [
 const router = createBrowserRouter([
 
   {
+    path: "/home",
+    element: <Home />
+  },
+  {
+    path: "/",
+    element: <Navigate to="/home" />,
+  },
+  {
     path: "/login",
     element: <Login />
   },
@@ -60,13 +69,13 @@ const router = createBrowserRouter([
         element: <Professor navbar_items={navbar_items} />
       },
       {
-        path: "/home",
-        element: <Home />
-      }, {
-        path: "/",
-        element: <Navigate to="/home" />,
+        path: "/notfound",
+        element: <NotFound />,
       },
-
+      {
+        path: "/*",
+        element: <Navigate to="/notfound" />,
+      },
     ]
   }
 
