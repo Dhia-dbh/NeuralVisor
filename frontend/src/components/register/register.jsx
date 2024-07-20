@@ -52,7 +52,7 @@ export default function Login() {
                             <input onChange={handleChange} placeholder='Password' type="password" name="password" id="password" value={password} />
                             <input onChange={handleChange} placeholder='Confirm Password' type="password" name="confirmPassword" id="confirmPassword" value={confirmPassword} />
                             <div className='login_buttons'>
-                                <input type="button" value="Sign up" className='btn btn-primary' />
+                                <input type="submit" value="Sign up" className='btn btn-primary' />
                                 <SignInWithGoogle />
                                 <div className='no_account'>Already have an account ? <a href="/login">Click here</a></div>
 

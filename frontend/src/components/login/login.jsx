@@ -44,7 +44,7 @@ export default function Login() {
                             <input placeholder='Username' type="text" name="username" id="username" onChange={handleChange} value={username} />
                             <input placeholder='Password' type="password" name="password" id="password" onChange={handleChange} value={password} />
                             <div className='login_buttons'>
-                                <input type="button" value="Login" className='btn btn-primary' />
+                                <input type="submit" value="Login" className='btn btn-primary' />
                                 <div className='no_account'>You don't have an account ? <span className='link-like' onClick={() => {
                                     navigate("/register")
                                 }}>Click here</span></div>
