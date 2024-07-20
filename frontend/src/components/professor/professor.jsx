@@ -1,10 +1,18 @@
 import React, { useState } from 'react'
 import "./professor.css"
 import Navbar from "@components/navbar/navbar"
+import useAuth from "@hooks/useAuth"
+import { useNavigate } from 'react-router-dom';
 
 export default function Professor({ navbar_items }) {
     const [selected, setSelected] = useState("Start session");
+    const { auth, setAuth } = useAuth();
+    const navigate = useNavigate();
     const handleChange = (menu) => {
+        if (menu === "Log Out") {
+            setAuth({});
+            navigate("/");
+        }
         setSelected(menu)
     }
     return (

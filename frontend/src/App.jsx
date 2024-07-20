@@ -41,6 +41,11 @@ const navbar_items = [
     icon: "navbar/Settings",
     name: "Settings"
   },
+  {
+    path: "/logout",
+    icon: "navbar/logout",
+    name: "Log Out"
+  },
 ]
 const router = createBrowserRouter([
 
