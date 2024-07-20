@@ -5,7 +5,7 @@ const SignInWithGoogle = () => {
     useEffect(() => {
         /* global google */
         google.accounts.id.initialize({
-            client_id: 'YOUR_GOOGLE_CLIENT_ID',
+            client_id: 'Y912231302087-3k88r2m80rmit0mk7nu22fvgp9qg048t.apps.googleusercontent.com',
             callback: handleCredentialResponse
         });
         google.accounts.id.renderButton(

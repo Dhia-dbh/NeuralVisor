@@ -44,3 +44,7 @@
     border-bottom: 1px solid white;
     color: white;
 }
+
+.login_buttons>input {
+    margin: 15px 0;
+}
