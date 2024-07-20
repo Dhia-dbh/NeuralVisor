@@ -40,7 +40,7 @@ body {
     cursor: pointer;
     opacity: 1;
     border-radius: 1rem;
-    transition: ease-out;
+    transition: ease-out 0.4s;
     animation: title_shake 1s infinite alternate;
 }
 
