@@ -14,34 +14,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 const navbar_items = [
   {
-    path: "/newpost",
-    icon: "",
-    name: "New post"
+    path: "/dashboard",
+    icon: "navbar/Dashboard",
+    name: "Dashboard"
   },
   {
-    path: "/conversation",
-    icon: "",
-    name: "Conversation"
+    path: "/mylessons",
+    icon: "navbar/My lessons",
+    name: "My lessons"
   },
   {
-    path: "/newsession",
-    icon: "",
-    name: "New Session"
+    path: "/students",
+    icon: "navbar/Students",
+    name: "Students"
   },
   {
-    path: "/checkprogress",
-    icon: "",
-    name: "Check Progress"
+    path: "/startseesion",
+    icon: "navbar/Start session",
+    name: "Start session"
   },
   {
-    path: "/schedule",
-    icon: "",
-    name: "Schedule"
-  },
-  {
-    path: "/logout",
-    icon: "",
-    name: "Log out"
+    path: "/settings",
+    icon: "navbar/Settings",
+    name: "Settings"
   },
 ]
 const router = createBrowserRouter([

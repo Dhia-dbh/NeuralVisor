@@ -1,16 +1,56 @@
 .navbarr {
     position: sticky;
+    background-color: #39D9FC;
     height: 100vh;
+    width: 20%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    border-radius: 0 2rem 0 0;
+    padding: 20px 0 20px 15px;
+}
+
+.navbar_items {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 
 .navbar_item {
-    background-color: aqua;
-    height: 100%;
-    width: 250px;
-    text-align: center;
+    padding: 5px 45px;
+    width: 80%;
+    background-color: none;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    background-color: none;
+    border-radius: 2rem 0 0 2rem;
+    line-height: 3rem;
+    cursor: pointer;
+    transition: ease-in-out 0.4s;
 }
-  
+
+.selected {
+    color: black;
+}
+
+.navbar_item_selected {
+    padding: 5px 45px;
+    width: 80%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    background-color: none;
+    border-radius: 2rem 0 0 2rem;
+    line-height: 3rem;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.title {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
