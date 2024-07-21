@@ -1,8 +1,6 @@
 html,
 body {
-    margin: 0;
-    height: 100%;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .bg-default_home {
@@ -15,7 +13,7 @@ body {
 .title_home {
     color: white;
     position: absolute;
-    top: 40%; 
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 48px;

@@ -15,6 +15,7 @@ import useAuth from "@hooks/useAuth";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import RequireAuth from './components/requireAuth'
+import { ConfirmProvider } from 'material-ui-confirm'
 const navbar_items = [
   {
     path: "/dashboard",
@@ -93,7 +94,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <ConfirmProvider>
+        <RouterProvider router={router} />
+      </ConfirmProvider>
     </>
   )
 }
