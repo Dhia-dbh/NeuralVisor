@@ -1,3 +1,12 @@
+.title {
+    color: white;
+    font-family: 'JK Adobe-light';
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 96px;
+    margin: 0 25px;
+}
+
 .bg-default {
     background-color: #27262C;
     height: 100vh;
@@ -37,7 +46,7 @@
 }
 
 .form-register>form>input {
-    margin: 15px 24px;
+    margin: 10px 24px;
     padding: 5px;
     background: transparent;
     border: none;

@@ -4,3 +4,10 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'JK Adobe-light';
+    src: url('../public/fonts/JKAbode-LightDemo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

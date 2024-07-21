@@ -7,7 +7,8 @@ import Dropfile from '../dropfile/Dropfile';
 import { useConfirm } from "material-ui-confirm";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ProfessorDashboard from './professorDashboard';
+import ProfessorStartLesson from './professorStartLesson';
+import Professor_Dashboard from './professor_Dashboard';
 import ProfessorMyLessons from './professorMyLessons';
 
 export default function Professor({ navbar_items }) {
@@ -38,7 +39,7 @@ export default function Professor({ navbar_items }) {
             case "Dashboard":
                 return (
                     <>
-                        <ProfessorDashboard onStartSession={handleStartSession} />
+                        <Professor_Dashboard onStartSession={handleStartSession} />
                     </>);
 
             case "My lessons":
@@ -50,18 +51,18 @@ export default function Professor({ navbar_items }) {
             case "Students":
                 return (
                     <>
-                        <ProfessorDashboard onStartSession={handleStartSession} />
+                        <ProfessorStartLesson onStartSession={handleStartSession} />
                     </>);
             case "Start session":
                 return (
                     <>
-                        <ProfessorDashboard onStartSession={handleStartSession} />
+                        <ProfessorStartLesson onStartSession={handleStartSession} />
                     </>);
 
             case "Settings":
                 return (
                     <>
-                        <ProfessorDashboard onStartSession={handleStartSession} />
+                        <ProfessorStartLesson onStartSession={handleStartSession} />
                     </>);
 
 

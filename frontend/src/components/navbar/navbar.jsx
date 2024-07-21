@@ -3,7 +3,7 @@ import "./navbar.css"
 export default function Navbar({ navbar_items, selected, onChange }) {
     return (
         <div className='navbarr'>
-            <div className='title'>NeuralVisor</div>
+            <div className='title-navbar'>NeuralVisor</div>
             <div className='navbar_items'>
                 {
                     navbar_items.map((item) => {

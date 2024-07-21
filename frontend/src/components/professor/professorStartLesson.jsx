@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from '../navbar/navbar'
 import Dropfile from '../dropfile/Dropfile';
-export default function ProfessorDashboard({ onStartSession }) {
+export default function professorStartLesson({ onStartSession }) {
     useEffect(() => {
         // Set overflow styles when component mounts
         document.body.style.overflow = 'hidden';
