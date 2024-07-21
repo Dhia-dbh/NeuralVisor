@@ -15,7 +15,7 @@ Education-AI is a multifaceted platform designed to assist both teachers and stu
 
 ## Structure
 This repository is organized as follows:
-- `backend/`: Contains all the code for the Education AI platform's backend, including API endpoints, database models, and business logic implemented in Python using the Flask framework.
+- `back-end/`: Contains all the code for the Education AI platform's backend, including API endpoints, database models, and business logic implemented in Python using the Flask framework.
 - `frontend/`: Houses the frontend implementation of the Education AI platform using JavaScript and React, including the user interface with HTML, CSS, and JavaScript files.
 - `models/`: Includes the trained generative AI models used by Education AI to enhance its capabilities. These models are implemented using Python-based AI/ML libraries and are crucial for solving well-defined problems like visual question answering.
 
