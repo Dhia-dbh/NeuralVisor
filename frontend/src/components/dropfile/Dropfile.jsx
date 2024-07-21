@@ -7,9 +7,9 @@ function Dropfile() {
 	}
 	return (
 		<div className="box">
-			<h2 className="header">
-				React drop files input
-			</h2>
+			<h4 className="header">
+				Drop Course Material
+			</h4>
 			<DropFileInput
 				onFileChange={(files) => onFileChange(files)}
 			/>

@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./home.css"
 import { useNavigate } from 'react-router-dom'
 export default function Home() {
     const navigate = useNavigate();
+    useEffect(() => {
+        // Set overflow styles when component mounts
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+
+    }, []);
     return (
         <div style={{ overflow: "hidden" }}>
             <div className='bg-default_home'>

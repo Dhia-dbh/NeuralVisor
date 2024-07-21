@@ -14,7 +14,6 @@
 
 .box {
   background-color: var(--box-bg);
-  padding: 30px;
   border: none;
   border-radius: 20px;
   /*box-shadow: var(--box-shadow);*/

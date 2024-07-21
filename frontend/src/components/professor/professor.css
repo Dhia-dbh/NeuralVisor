@@ -60,6 +60,8 @@
     margin: auto;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 24px;
     border-radius: 2rem;
+    max-height: 70vh;
+    ;
 }
 
 .content img {
@@ -75,4 +77,8 @@
 
 .grid button {
     width: fit-content;
+}
+
+.center {
+    margin: 15px auto;
 }

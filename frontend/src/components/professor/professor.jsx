@@ -7,10 +7,12 @@ import Dropfile from '../dropfile/Dropfile';
 import { useConfirm } from "material-ui-confirm";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProfessorDashboard from './professorDashboard';
+import ProfessorMyLessons from './professorMyLessons';
 
 export default function Professor({ navbar_items }) {
     const confirm = useConfirm();
-    const [selected, setSelected] = useState("Start session");
+    const [selected, setSelected] = useState("My lessons");
     const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const handleChange = (menu) => {
@@ -31,6 +33,35 @@ export default function Professor({ navbar_items }) {
         toast.dismiss();
         toast.info("Wow so easy!");
     }
+    const handleMenuDisplay = (selected) => {
+        switch (selected) {
+            case "Dashboard":
+                return (
+                    <>
+                        <ProfessorDashboard navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                    </>);
+
+            case "My lessons":
+                return (
+                    <>
+                        <ProfessorMyLessons navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                    </>);
+
+            case "Students":
+                return (
+                    <>
+                        <ProfessorDashboard navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                    </>);
+
+            case "Settings":
+                return (
+                    <>
+                        <ProfessorDashboard navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                    </>);
+
+
+        }
+    }
     useEffect(() => {
         // Set overflow styles when component mounts
         document.body.style.overflow = 'scroll';
@@ -47,36 +78,9 @@ export default function Professor({ navbar_items }) {
         <div>
             <ToastContainer limit={2} />
             <div className='screen'>
-                <Navbar navbar_items={navbar_items} onChange={handleChange} selected={selected} />
-                <div className='navbar_filler'></div>
-                <div className='main_content'>
-                    <div className='header'>
-                        <div className='user'>
-                            <div>
-                                <img src="pdp.jpg" height="56px" width="56px" alt="" />
-                            </div>
-                            <div className='name_and_info'>
-                                <div className='name'>
-                                    <span>Dhia Ben Hamouda</span>
-                                    <img src="arrow-down.svg" alt="" />
-                                </div>
-                                <div className='info'>Last login: Today</div>
-                            </div>
-                        </div>
-                        <div className='notification'>
-                            <img src="notification.svg" alt="" />
-                        </div>
-                    </div>
-                    <div className='content'>
-                        <h2>Live Stream 7/20/2024</h2>
-                        <div className='grid'>
-                            <img src="Webcam.png" alt="Webcam" />
-                            <button type="button" className='btn btn-outline-secondary' onClick={handleStartSession} >Start Session</button>
-                        </div>
-                    </div>
-                    <div className='spacer'></div>
-                    <Dropfile />
-                </div>
+                {
+                    handleMenuDisplay(selected)
+                }
             </div>
 
         </div>
