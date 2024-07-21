@@ -12,7 +12,7 @@ import ProfessorMyLessons from './professorMyLessons';
 
 export default function Professor({ navbar_items }) {
     const confirm = useConfirm();
-    const [selected, setSelected] = useState("My lessons");
+    const [selected, setSelected] = useState("Start session");
     const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const handleChange = (menu) => {
@@ -38,25 +38,30 @@ export default function Professor({ navbar_items }) {
             case "Dashboard":
                 return (
                     <>
-                        <ProfessorDashboard navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                        <ProfessorDashboard onStartSession={handleStartSession} />
                     </>);
 
             case "My lessons":
                 return (
                     <>
-                        <ProfessorMyLessons navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                        <ProfessorMyLessons onStartSession={handleStartSession} />
                     </>);
 
             case "Students":
                 return (
                     <>
-                        <ProfessorDashboard navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                        <ProfessorDashboard onStartSession={handleStartSession} />
+                    </>);
+            case "Start session":
+                return (
+                    <>
+                        <ProfessorDashboard onStartSession={handleStartSession} />
                     </>);
 
             case "Settings":
                 return (
                     <>
-                        <ProfessorDashboard navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                        <ProfessorDashboard onStartSession={handleStartSession} />
                     </>);
 
 
@@ -78,9 +83,33 @@ export default function Professor({ navbar_items }) {
         <div>
             <ToastContainer limit={2} />
             <div className='screen'>
-                {
-                    handleMenuDisplay(selected)
-                }
+                <Navbar navbar_items={navbar_items} onChange={handleChange} selected={selected} onStartSession={handleStartSession} />
+                <div className='navbar_filler'></div>
+                <div className='main_content'>
+                    <div className='header'>
+                        <div className='user'>
+                            <div>
+                                <img src="pdp.jpg" height="56px" width="56px" alt="" />
+                            </div>
+                            <div className='name_and_info'>
+                                <div className='name'>
+                                    <span>Dhia Ben Hamouda</span>
+                                    <img src="arrow-down.svg" alt="" />
+                                </div>
+                                <div className='info'>Last login: Today</div>
+                            </div>
+                        </div>
+                        <div className='notification'>
+                            <img src="notification.svg" alt="" />
+                        </div>
+                    </div>
+                    <div className='content'>
+                        {
+                            handleMenuDisplay(selected)
+                        }
+                    </div>
+                    <div className='spacer'></div>
+                </div>
             </div>
 
         </div>

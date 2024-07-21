@@ -36,7 +36,7 @@
 }
 
 .drop-file-input__label img {
-	width: 500px;
+	width: 100px;
 }
 
 .drop-file-preview {
@@ -61,8 +61,8 @@
 }
 
 .drop-file-preview__item img {
-	width: 50px;
 	margin-right: 20px;
+	height: 100px;
 }
 
 .drop-file-preview__item__info {
@@ -83,7 +83,6 @@
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
-	box-shadow: var(--box-shadow);
 	cursor: pointer;
 	opacity: 0;
 	transition: opacity 0.3s ease;
