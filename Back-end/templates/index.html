@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket Camera Screenshot</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Camera Screenshot with Flask-SocketIO</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
+    <div id="screenshots"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const socket = io();
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const screenshotsDiv = document.getElementById("screenshots");
+        const context = canvas.getContext("2d");
+
+        // Get access to the camera
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+          video.srcObject = stream;
+        });
+
+        // Function to take a screenshot and send it to the server
+        function takeScreenshot() {
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const dataURL = canvas.toDataURL("image/png");
+          //send to the back-end
+          socket.emit("screenshot", dataURL);
+        }
+
+        // Take a screenshot every 1 seconds
+        setInterval(takeScreenshot, 1000);
+
+        // Display the screenshot and download link received from the server
+        socket.on("update_image", (data) => {
+          const existingParagraph = document.getElementById("screenshotText");
+
+          if (existingParagraph) {
+            // If the paragraph already exists, update its content
+            existingParagraph.textContent ="Number of Focused pupils : " + data.data;
+          } else {
+            // If the paragraph does not exist, create a new one
+            const p = document.createElement("p");
+            p.id = "screenshotText";
+            p.textContent = data.data;
+            screenshotsDiv.appendChild(p);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
