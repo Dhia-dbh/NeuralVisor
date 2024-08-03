@@ -12,9 +12,41 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the req
 The project already containes the requirments.txt file wich containes the nessasary libaries with the required version
 
 ```bash
+conda activate .conda
 pip install -r requirements.txt
+$env:URI = "mongodb+srv://achebbi2002:N8vlNANPaejPYiRI@cluster0.dkot1pb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+```
+## Unit Testing
+
+Unit testing is a critical part of our development process to ensure that our code functions correctly and meets the requirements. This document provides information on how to run unit tests for the project.
+
+### Prerequisites
+
+Ensure that you have the following tools installed:
+- Python 3.x
+- Required Python packages (listed in `requirements.txt`)
+
+### Running Tests
+
+To run the unit tests for this project, follow these steps:
+1. **Activate Your Virtual Environment**
+```sh
+conda activate .conda
+```
+2. **Run the Unit Tests**
+
+    Use the following command to discover and run all unit tests:
+```sh
+python -m unittest discover -s unit_testing
 ```
 
+### Test Organization
+- **Test Directory**: All unit tests are located in the unit_testing directory.
+- **Test Files**: Test files should be named in the format test_*.py to be discovered by unittest. Each test file should correspond to a module or feature being tested.
+- **Test Cases**: Test cases should be defined within classes that inherit from unittest.TestCase.
+
+### Documentation
+For more details on writing and organizing tests, refer to the official unittest documentation.
 ## Routes
 
 - `/`: Home route

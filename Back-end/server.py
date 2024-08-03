@@ -1,22 +1,20 @@
-"""
-This module provides a Flask application with routes for student and teacher management,
-authentication, and real-time communication using Socket.IO.
-"""
-
 import os
 import base64
 from flask import Flask, jsonify, request, render_template
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_socketio import SocketIO, emit
-from pymongo import MongoClient, errors
-from pymongo.server_api import ServerApi
+from CRUD_OP.database import get_database
+from CRUD_OP.student_db import add_student, update_student, delete_student, get_all_students
+from CRUD_OP.teacher_db import add_teacher, update_teacher, delete_teacher, get_all_teachers
 from track import track_focus_screenshot
-
+from pymongo import errors
 app = Flask(__name__)
 socketio = SocketIO(app)
 
 app.config['JWT_SECRET_KEY'] = "a3f5e3a4d2f4b5c3e5f2a4b3c5e2f3a4d2b5c3e5a4f3b2c5e3a4d2f4b5c3e5f2"
 jwt = JWTManager(app)
+
+student_collection, teacher_collection = get_database()
 
 def handle_download(data):
     """Handle the downloading of base64-encoded images."""
@@ -34,159 +32,53 @@ def home():
     """Home route."""
     return "Welcome to the back-end"
 
-@app.route("/addStudent")
-def add_student():
+@app.route("/addStudent", methods=['POST'])
+def add_student_route():
     """Add a new student."""
-    try:
-        data = request.args
-        first_name = data.get('FirstName')
-        last_name = data.get('LastName')
-        email = data.get('Email')
-        password = data.get('Password')
-        document = {
-            "_id": email, "FirstName": first_name, "LastName": last_name,
-            "Email": email, "password": password
-        }
-        student_collection.insert_one(document)
-        return jsonify({"message": "Student Added"}), 200
-    except errors.DuplicateKeyError:
-        return jsonify({"message": "A Student with this email already exists."}), 400
-    except errors.PyMongoError as e:
-        print(e)
-        return jsonify({"message": str(e)}), 500
+    data = request.get_json()
+    return jsonify(add_student(student_collection, data))
 
-@app.route("/addTeacher")
-def add_teacher():
+@app.route("/addTeacher", methods=['POST'])
+def add_teacher_route():
     """Add a new teacher."""
-    try:
-        data = request.args
-        first_name = data.get('FirstName')
-        last_name = data.get('LastName')
-        email = data.get('Email')
-        password = data.get('Password')
-        document = {
-            "_id": email, "FirstName": first_name, "LastName": last_name,
-            "Email": email, "password": password
-        }
-        teacher_collection.insert_one(document)
-        return jsonify({"message": "Teacher Added"}), 200
-    except errors.DuplicateKeyError:
-        return jsonify({"message": "A Teacher with this email already exists."}), 400
-    except errors.PyMongoError as e:
-        print(e)
-        return jsonify({"message": str(e)}), 500
+    data = request.get_json()
+    return jsonify(add_teacher(teacher_collection, data))
 
-@app.route("/UpdateStudent")
-def update_student():
+@app.route("/UpdateStudent", methods=['POST'])
+def update_student_route():
     """Update an existing student."""
-    try:
-        data = request.args
-        first_name = data.get('FirstName')
-        last_name = data.get('LastName')
-        email = data.get('Email')
-        password = data.get('Password')
-        if not email:
-            return jsonify({"message": "Email is required"}), 400
-        document = {
-            "FirstName": first_name, "LastName": last_name,
-            "Email": email, "password": password
-        }
-        update_result=student_collection.update_one({"_id": email}, {"$set": document})
-        if update_result.matched_count == 0:
-            return jsonify({"message": "No student found with the given email"}), 404
-        return jsonify({"message": "Student Updated"}), 200
-    except errors.PyMongoError as e:
-        return jsonify({"message": str(e)}), 500
+    data = request.get_json()
+    return jsonify(update_student(student_collection, data))
 
-@app.route("/UpdateTeacher")
-def update_teacher():
+@app.route("/UpdateTeacher", methods=['POST'])
+def update_teacher_route():
     """Update an existing teacher."""
-    try:
-        data = request.args
-        first_name = data.get('FirstName')
-        last_name = data.get('LastName')
-        email = data.get('Email')
-        password = data.get('Password')
-        if not email:
-            return jsonify({"message": "Email is required"}), 400
-        document = {
-            "FirstName": first_name, "LastName": last_name,
-            "Email": email, "password": password
-        }
-        teacher_collection.update_one({"_id": email}, {"$set": document})
-        return jsonify({"message": "Teacher Updated"}), 200
-    except errors.PyMongoError as e:
-        return jsonify({"message": str(e)}), 500
+    data = request.get_json()
+    return jsonify(update_teacher(teacher_collection, data))
 
-@app.route("/DeleteTeacher")
-def delete_teacher():
+@app.route("/DeleteTeacher", methods=['DELETE'])
+def delete_teacher_route():
     """Delete a teacher."""
-    try:
-        data = request.args
-        email = data.get('Email')
-        result = teacher_collection.delete_one({"_id": email})
-        if result.deleted_count > 0:
-            return jsonify({"message": "Teacher deleted"}), 200
-        return jsonify({"message": "Teacher not found"}), 404
-    except errors.PyMongoError as e:
-        print(e)
-        return jsonify({"message": str(e)}), 500
+    data = request.get_json()
+    email = data.get('Email')
+    return jsonify(delete_teacher(teacher_collection, email))
 
-@app.route("/DeleteStudent")
-def delete_student():
+@app.route("/DeleteStudent", methods=['DELETE'])
+def delete_student_route():
     """Delete a student."""
-    try:
-        data = request.args
-        email = data.get('Email')
-        result = student_collection.delete_one({"_id": email})
-        if result.deleted_count > 0:
-            return jsonify({"message": "Student deleted"}), 200
-        return jsonify({"message": "Student not found"}), 404
-    except errors.PyMongoError as e:
-        print(e)
-        return jsonify({"message": str(e)}), 500
+    data = request.get_json()
+    email = data.get('Email')
+    return jsonify(delete_student(student_collection, email))
 
 @app.route("/AllStudents")
-def all_students():
+def all_students_route():
     """Retrieve all students."""
-    try:
-        students_list = []
-        documents = student_collection.find()
-        for document in documents:
-            if isinstance(document, dict):
-                document.pop('_id')
-                students_list.append(document)
-            else:
-                if hasattr(document, 'to_dict'):
-                    students_list.append(document.to_dict())
-                else:
-                    students_list.append(str(document))
-        print(students_list)
-        return jsonify({"message": students_list}), 200
-    except errors.PyMongoError as e:
-        print(e)
-        return jsonify({"message": str(e)}), 500
+    return jsonify(get_all_students(student_collection))
 
 @app.route("/AllTeachers")
-def all_teachers():
+def all_teachers_route():
     """Retrieve all teachers."""
-    try:
-        teachers_list = []
-        documents = teacher_collection.find()
-        for document in documents:
-            if isinstance(document, dict):
-                document.pop('_id')
-                teachers_list.append(document)
-            else:
-                if hasattr(document, 'to_dict'):
-                    teachers_list.append(document.to_dict())
-                else:
-                    teachers_list.append(str(document))
-        print(teachers_list)
-        return jsonify({"message": teachers_list}), 200
-    except errors.PyMongoError as e:
-        print(e)
-        return jsonify({"message": str(e)}), 500
+    return jsonify(get_all_teachers(teacher_collection))
 
 @app.route('/login_Demo')
 def login_demo():
@@ -203,7 +95,7 @@ def login_demo():
         if not student:
             return jsonify({"message": "No student found with the given email"}), 404
         passworddb = student.get('password')
-        if password==passworddb:
+        if password == passworddb:
             return jsonify({"msg": "Access guaranteed!"}), 200
         return jsonify({"msg": "Denied"}), 401
     except Exception as e:
@@ -257,9 +149,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    URI = "mongodb+srv://achebbi2002:N8vlNANPaejPYiRI@cluster0.dkot1pb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-    client = MongoClient(URI, server_api=ServerApi('1'))
-    db = client.cluster0
-    student_collection = db.Student
-    teacher_collection = db.Teacher
     app.run(debug=True)
