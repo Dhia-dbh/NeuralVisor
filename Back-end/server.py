@@ -6,15 +6,20 @@ from flask_socketio import SocketIO, emit
 from CRUD_OP.database import get_database
 from CRUD_OP.student_db import add_student, update_student, delete_student, get_all_students
 from CRUD_OP.teacher_db import add_teacher, update_teacher, delete_teacher, get_all_teachers
+from CRUD_OP.files_db import add_File
 from track import track_focus_screenshot
 from pymongo import errors
+import secrets
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-app.config['JWT_SECRET_KEY'] = "a3f5e3a4d2f4b5c3e5f2a4b3c5e2f3a4d2b5c3e5a4f3b2c5e3a4d2f4b5c3e5f2"
+app.config['JWT_SECRET_KEY'] = secrets.token_hex(32)
 jwt = JWTManager(app)
 
-student_collection, teacher_collection = get_database()
+student_collection, teacher_collection, Files_collection = get_database()
+
+if student_collection is None or teacher_collection is None:
+    raise SystemExit("Failed to connect to the database. Check your URI or database server.")
 
 def handle_download(data):
     """Handle the downloading of base64-encoded images."""
@@ -43,6 +48,11 @@ def add_teacher_route():
     """Add a new teacher."""
     data = request.get_json()
     return jsonify(add_teacher(teacher_collection, data))
+
+@app.route("/addFile",methods=["POST"])
+def add_file_route():
+    """Add a new File."""
+    return jsonify(add_File(Files_collection, request))    
 
 @app.route("/UpdateStudent", methods=['POST'])
 def update_student_route():
